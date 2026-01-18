@@ -18,6 +18,7 @@ import APIHub from './pages/APIHub';
 import Roadmaps from './pages/Roadmaps';
 import Glossary from './pages/Glossary';
 import Login from './pages/Login';
+import Games from './pages/Games';
 
 
 function App() {
@@ -38,7 +39,7 @@ function App() {
             <Route path="/roadmaps" element={<Roadmaps />} />
             <Route path="/glossary" element={<Glossary />} />
             <Route path="/ranking" element={<Ranking />} />
-            <Route path="/ranking" element={<Ranking />} />
+            <Route path="/games" element={<Games />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/login" element={<Login />} />
           </Routes>

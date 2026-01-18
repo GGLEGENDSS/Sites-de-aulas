@@ -1,6 +1,6 @@
 import { useNavigate, Link, useLocation } from 'react-router-dom';
 import { useState } from 'react';
-import { Home, Compass, BookOpen, Terminal, User, Search, Zap, Book, Trophy, Database, MapPin, Sun, Moon, Instagram } from 'lucide-react';
+import { Home, Compass, BookOpen, Terminal, User, Search, Zap, Book, Trophy, Database, MapPin, Sun, Moon, Instagram, Gamepad2 } from 'lucide-react';
 import { useProgress } from '../data/ProgressContext';
 import { useTheme } from '../data/ThemeContext';
 import { lessons } from '../data/lessons';
@@ -60,6 +60,10 @@ const Layout = ({ children }) => {
           <Link to="/lessons" className={`nav-item ${isActive('/lessons')}`}>
             <BookOpen size={24} />
             <span>Aulas</span>
+          </Link>
+          <Link to="/games" className={`nav-item ${isActive('/games')}`}>
+            <Gamepad2 size={24} />
+            <span>Mini-Jogos</span>
           </Link>
           <Link to="/library" className={`nav-item ${isActive('/library')}`}>
             <Book size={24} />

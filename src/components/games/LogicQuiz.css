@@ -1,0 +1,239 @@
+.logic-quiz {
+  width: 100%;
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 2rem;
+  background: linear-gradient(135deg, rgba(88, 204, 2, 0.1) 0%, rgba(88, 204, 2, 0.05) 100%);
+  border-radius: 1.5rem;
+  border: 2px solid rgba(88, 204, 2, 0.3);
+}
+
+.quiz-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid rgba(88, 204, 2, 0.2);
+}
+
+.progress {
+  flex: 1;
+  margin-right: 2rem;
+}
+
+.progress-text {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 0.5rem;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #58cc02, #10b981);
+  transition: width 0.3s ease;
+}
+
+.score {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #58cc02;
+  white-space: nowrap;
+}
+
+.quiz-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.question {
+  font-size: 1.3rem;
+  color: white;
+  margin: 0;
+  line-height: 1.6;
+}
+
+.options {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+.option {
+  padding: 1.2rem;
+  background: rgba(0, 0, 0, 0.3);
+  border: 2px solid rgba(88, 204, 2, 0.2);
+  border-radius: 0.75rem;
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.3s ease;
+  font-family: 'Courier New', monospace;
+  word-break: break-word;
+}
+
+.option:not(:disabled):hover {
+  border-color: #58cc02;
+  background: rgba(88, 204, 2, 0.1);
+  transform: translateX(4px);
+}
+
+.option:disabled {
+  cursor: not-allowed;
+}
+
+.option.correct {
+  border-color: #10b981;
+  background: rgba(16, 185, 129, 0.2);
+  color: #10b981;
+}
+
+.option.wrong {
+  border-color: #ef4444;
+  background: rgba(239, 68, 68, 0.2);
+  color: #fca5a5;
+}
+
+.explanation {
+  padding: 1.5rem;
+  background: rgba(88, 204, 2, 0.15);
+  border-radius: 0.75rem;
+  border-left: 4px solid #58cc02;
+  animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.explanation-title {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #58cc02;
+  margin: 0 0 0.5rem 0;
+}
+
+.explanation-text {
+  color: rgba(255, 255, 255, 0.9);
+  margin: 0 0 1rem 0;
+  line-height: 1.6;
+}
+
+.next-btn {
+  padding: 0.75rem 2rem;
+  background: #58cc02;
+  color: black;
+  border: none;
+  border-radius: 0.5rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  align-self: flex-end;
+}
+
+.next-btn:hover {
+  background: #46a302;
+  transform: translateY(-2px);
+}
+
+.logic-quiz-result {
+  text-align: center;
+  padding: 2rem;
+  background: linear-gradient(135deg, rgba(88, 204, 2, 0.15) 0%, rgba(16, 185, 129, 0.1) 100%);
+  border-radius: 1.5rem;
+  border: 2px solid rgba(88, 204, 2, 0.3);
+}
+
+.logic-quiz-result h2 {
+  font-size: 2rem;
+  color: #58cc02;
+  margin: 0 0 2rem 0;
+}
+
+.result-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 0.75rem;
+  border: 1px solid rgba(88, 204, 2, 0.2);
+}
+
+.stat .label {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.6);
+  margin-bottom: 0.5rem;
+}
+
+.stat .value {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #58cc02;
+}
+
+.feedback {
+  font-size: 1.1rem;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+}
+
+.logic-quiz-result button {
+  padding: 0.75rem 2rem;
+  background: #58cc02;
+  color: black;
+  border: none;
+  border-radius: 0.75rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.logic-quiz-result button:hover {
+  background: #46a302;
+  transform: translateY(-2px);
+}
+
+@media (max-width: 640px) {
+  .logic-quiz {
+    padding: 1rem;
+  }
+
+  .quiz-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .question {
+    font-size: 1.1rem;
+  }
+
+  .result-stats {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,261 @@
+.reflex-game {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 2rem;
+  background: linear-gradient(135deg, rgba(88, 204, 2, 0.1) 0%, rgba(88, 204, 2, 0.05) 100%);
+  border-radius: 1.5rem;
+  border: 2px solid rgba(88, 204, 2, 0.3);
+  text-align: center;
+}
+
+.reflex-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 3rem;
+  padding: 1rem;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 0.75rem;
+}
+
+.round-counter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.round-counter .label {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.6);
+  margin-bottom: 0.25rem;
+}
+
+.round-counter .value {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #58cc02;
+}
+
+.status {
+  font-size: 1.2rem;
+  font-weight: bold;
+  padding: 0.5rem 1.5rem;
+  border-radius: 0.5rem;
+}
+
+.status .waiting {
+  color: #f59e0b;
+  background: rgba(245, 158, 11, 0.1);
+}
+
+.status .ready {
+  color: #10b981;
+  background: rgba(16, 185, 129, 0.1);
+  animation: pulse 0.5s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
+
+.reflex-box {
+  width: 200px;
+  height: 200px;
+  margin: 2rem auto;
+  border-radius: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 4rem;
+  cursor: pointer;
+  transition: all 0.1s ease;
+  border: 3px solid rgba(255, 255, 255, 0.1);
+}
+
+.reflex-box:hover {
+  border-color: rgba(255, 255, 255, 0.3);
+  box-shadow: 0 0 30px rgba(88, 204, 2, 0.4);
+}
+
+.reflex-box:active {
+  transform: scale(0.95);
+}
+
+.instruction {
+  font-size: 1.1rem;
+  color: rgba(255, 255, 255, 0.8);
+  margin: 2rem 0;
+}
+
+.reflex-intro {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 2rem;
+  background: linear-gradient(135deg, rgba(88, 204, 2, 0.1) 0%, rgba(88, 204, 2, 0.05) 100%);
+  border-radius: 1.5rem;
+  border: 2px solid rgba(88, 204, 2, 0.3);
+  text-align: center;
+}
+
+.reflex-intro h2 {
+  font-size: 2rem;
+  color: #58cc02;
+  margin: 0 0 1rem 0;
+}
+
+.reflex-intro p {
+  color: rgba(255, 255, 255, 0.7);
+  margin: 0 0 2rem 0;
+  font-size: 1.1rem;
+}
+
+.instructions {
+  background: rgba(0, 0, 0, 0.2);
+  padding: 1.5rem;
+  border-radius: 1rem;
+  border-left: 4px solid #58cc02;
+  text-align: left;
+  margin-bottom: 2rem;
+}
+
+.instructions h3 {
+  color: #58cc02;
+  margin: 0 0 1rem 0;
+}
+
+.instructions ol {
+  margin: 0;
+  padding-left: 1.5rem;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.instructions li {
+  margin-bottom: 0.5rem;
+}
+
+.start-button {
+  padding: 1rem 2rem;
+  background: #58cc02;
+  color: black;
+  border: none;
+  border-radius: 0.75rem;
+  font-weight: bold;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.start-button:hover {
+  background: #46a302;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(88, 204, 2, 0.4);
+}
+
+.reflex-result {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 2rem;
+  background: linear-gradient(135deg, rgba(88, 204, 2, 0.15) 0%, rgba(16, 185, 129, 0.1) 100%);
+  border-radius: 1.5rem;
+  border: 2px solid rgba(88, 204, 2, 0.3);
+  text-align: center;
+}
+
+.reflex-result h2 {
+  font-size: 2rem;
+  color: #58cc02;
+  margin: 0 0 1.5rem 0;
+}
+
+.warning {
+  padding: 1rem;
+  background: rgba(239, 68, 68, 0.1);
+  border: 2px solid rgba(239, 68, 68, 0.3);
+  border-radius: 0.75rem;
+  color: #fca5a5;
+  margin: 1rem 0;
+  font-size: 1.1rem;
+}
+
+.result-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin: 2rem 0;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 0.75rem;
+  border: 1px solid rgba(88, 204, 2, 0.2);
+}
+
+.stat .label {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.6);
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+}
+
+.stat .value {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #58cc02;
+}
+
+.feedback {
+  font-size: 1.2rem;
+  color: rgba(255, 255, 255, 0.9);
+  margin: 1.5rem 0;
+  font-weight: bold;
+}
+
+.play-again-button {
+  padding: 0.75rem 2rem;
+  background: #58cc02;
+  color: black;
+  border: none;
+  border-radius: 0.75rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.play-again-button:hover {
+  background: #46a302;
+  transform: translateY(-2px);
+}
+
+@media (max-width: 640px) {
+  .reflex-game,
+  .reflex-intro,
+  .reflex-result {
+    padding: 1rem;
+  }
+
+  .reflex-box {
+    width: 150px;
+    height: 150px;
+    font-size: 2.5rem;
+    margin: 1.5rem auto;
+  }
+
+  .result-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .instructions {
+    font-size: 0.9rem;
+  }
+}
