@@ -12,6 +12,8 @@ import Ranking from './pages/Ranking';
 import Lessons from './pages/Lessons';
 import Database from './pages/Database';
 import APIHub from './pages/APIHub';
+import Roadmaps from './pages/Roadmaps';
+import Glossary from './pages/Glossary';
 
 
 function App() {
@@ -27,6 +29,8 @@ function App() {
             <Route path="/library" element={<Library />} />
             <Route path="/database" element={<Database />} />
             <Route path="/api-hub" element={<APIHub />} />
+            <Route path="/roadmaps" element={<Roadmaps />} />
+            <Route path="/glossary" element={<Glossary />} />
             <Route path="/ranking" element={<Ranking />} />
             <Route path="/profile" element={<Profile />} />
           </Routes>

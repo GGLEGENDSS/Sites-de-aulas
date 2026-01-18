@@ -1,6 +1,6 @@
 import { useNavigate, Link, useLocation } from 'react-router-dom';
 import { useState } from 'react';
-import { Home, Compass, BookOpen, Terminal, User, Search, Zap, Book, Trophy } from 'lucide-react';
+import { Home, Compass, BookOpen, Terminal, User, Search, Zap, Book, Trophy, Database, MapPin } from 'lucide-react';
 import { useProgress } from '../data/ProgressContext';
 import { lessons } from '../data/lessons';
 import Logo from './Logo';
@@ -70,6 +70,14 @@ const Layout = ({ children }) => {
           <Link to="/api-hub" className={`nav-item ${isActive('/api-hub')}`}>
             <Compass size={24} />
             <span>Hub de APIs</span>
+          </Link>
+          <Link to="/roadmaps" className={`nav-item ${isActive('/roadmaps')}`}>
+            <MapPin size={24} />
+            <span>Roadmaps</span>
+          </Link>
+          <Link to="/glossary" className={`nav-item ${isActive('/glossary')}`}>
+            <BookOpen size={24} />
+            <span>Glossário</span>
           </Link>
           <Link to="/ranking" className={`nav-item ${isActive('/ranking')}`}>
             <Trophy size={24} />
