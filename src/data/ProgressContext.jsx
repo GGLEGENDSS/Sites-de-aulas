@@ -32,6 +32,11 @@ export const ProgressProvider = ({ children }) => {
         
         setCompletedLessons(savedLessons ? JSON.parse(savedLessons) : []);
         setStats(savedStats ? JSON.parse(savedStats) : { xp: 0, streak: 0, level: 1 });
+        
+        // Salvar nome do usuário para o ranking
+        if (user.displayName) {
+          localStorage.setItem(`userName_${user.uid}`, user.displayName);
+        }
       } else {
         // No user? Reset or keep default (could also be empty)
         setCompletedLessons([]);

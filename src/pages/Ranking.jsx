@@ -4,34 +4,82 @@ import { Trophy, Medal, Flame, Star } from 'lucide-react';
 import { useProgress } from '../data/ProgressContext';
 import './Ranking.css';
 
-// Mock data - Em produção, viria do Firebase
-const mockUsers = [
-  { id: 1, name: 'João Silva', xp: 2500, level: 15, streak: 25, badge: '⭐' },
-  { id: 2, name: 'Maria Santos', xp: 2300, level: 14, streak: 18, badge: '🏆' },
-  { id: 3, name: 'Pedro Costa', xp: 2100, level: 13, streak: 22, badge: '⚡' },
-  { id: 4, name: 'Ana Paula', xp: 1950, level: 12, streak: 15, badge: '🎯' },
-  { id: 5, name: 'Carlos Mendes', xp: 1800, level: 11, streak: 20, badge: '💎' },
-  { id: 6, name: 'Julia Oliveira', xp: 1650, level: 10, streak: 12, badge: '🌟' },
-  { id: 7, name: 'Lucas Ferreira', xp: 1500, level: 9, streak: 8, badge: '✨' },
-  { id: 8, name: 'Fernanda Lima', xp: 1350, level: 8, streak: 10, badge: '🎨' },
-  { id: 9, name: 'Roberto Alves', xp: 1200, level: 7, streak: 5, badge: '🚀' },
-  { id: 10, name: 'Beatriz Costa', xp: 1050, level: 6, streak: 7, badge: '💪' },
-];
-
 const Ranking = () => {
-  const { stats, completedLessons } = useProgress();
+  const { stats, completedLessons, user } = useProgress();
   const [filterBy, setFilterBy] = useState('xp');
-  const [sortedUsers, setSortedUsers] = useState(mockUsers);
+  const [sortedUsers, setSortedUsers] = useState([]);
+  const [userRank, setUserRank] = useState(null);
 
+  // Função para obter todos os usuários do localStorage
+  const getAllUsersRanking = () => {
+    const users = [];
+    
+    // Buscar todos os usuários salvos no localStorage
+    for (let i = 0; i < localStorage.length; i++) {
+      const key = localStorage.key(i);
+      
+      // Procurar por padrão "userStats_" para encontrar dados de usuários
+      if (key && key.startsWith('userStats_')) {
+        const uid = key.replace('userStats_', '');
+        const statsData = JSON.parse(localStorage.getItem(key));
+        const nameKey = `userName_${uid}`;
+        const userName = localStorage.getItem(nameKey) || `Usuário_${uid.slice(0, 6)}`;
+        
+        users.push({
+          id: uid,
+          name: userName,
+          xp: statsData.xp || 0,
+          level: Math.floor((statsData.xp || 0) / 100) + 1,
+          streak: statsData.streak || 0,
+          badge: getBadgeForLevel(Math.floor((statsData.xp || 0) / 100) + 1)
+        });
+      }
+    }
+    
+    return users;
+  };
+
+  const getBadgeForLevel = (level) => {
+    if (level >= 20) return '⭐';
+    if (level >= 15) return '🏆';
+    if (level >= 10) return '⚡';
+    if (level >= 7) return '🎯';
+    if (level >= 5) return '💎';
+    return '🌟';
+  };
+
+  // Atualizar ranking em tempo real
   useEffect(() => {
-    const sorted = [...mockUsers].sort((a, b) => {
+    const allUsers = getAllUsersRanking();
+    
+    // Se não houver usuários cadastrados, usar dados de exemplo
+    if (allUsers.length === 0) {
+      const mockUsers = [
+        { id: 1, name: 'João Silva', xp: 2500, level: 15, streak: 25, badge: '⭐' },
+        { id: 2, name: 'Maria Santos', xp: 2300, level: 14, streak: 18, badge: '🏆' },
+        { id: 3, name: 'Pedro Costa', xp: 2100, level: 13, streak: 22, badge: '⚡' },
+        { id: 4, name: 'Ana Paula', xp: 1950, level: 12, streak: 15, badge: '🎯' },
+        { id: 5, name: 'Carlos Mendes', xp: 1800, level: 11, streak: 20, badge: '💎' },
+      ];
+      setSortedUsers(mockUsers);
+      return;
+    }
+
+    const sorted = [...allUsers].sort((a, b) => {
       if (filterBy === 'xp') return b.xp - a.xp;
       if (filterBy === 'level') return b.level - a.level;
       if (filterBy === 'streak') return b.streak - a.streak;
       return 0;
     });
+
     setSortedUsers(sorted);
-  }, [filterBy]);
+
+    // Encontrar posição do usuário atual
+    if (user) {
+      const position = sorted.findIndex(u => u.id === user.uid) + 1;
+      setUserRank(position || null);
+    }
+  }, [filterBy, user]);
 
   const getMedalIcon = (position) => {
     if (position === 1) return '🥇';
@@ -85,7 +133,7 @@ const Ranking = () => {
       <div className="ranking-stats">
         <div className="stats-card">
           <h3>Sua Posição</h3>
-          <p className="stat-value">#12</p>
+          <p className="stat-value">{userRank ? `#${userRank}` : 'Não ranqueado'}</p>
         </div>
         <div className="stats-card">
           <h3>Seu XP</h3>
