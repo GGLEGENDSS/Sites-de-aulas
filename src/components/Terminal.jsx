@@ -59,11 +59,15 @@ const Terminal = ({ onCommand }) => {
     const handleResize = () => fitAddon.fit();
     window.addEventListener('resize', handleResize);
 
+    // Cleanup function to prevent memory leaks
     return () => {
       window.removeEventListener('resize', handleResize);
-      term.dispose();
+      if (xtermRef.current) {
+        xtermRef.current.dispose();
+        xtermRef.current = null;
+      }
     };
-  }, []);
+  }, [onCommand, updateVisualState]); // Add dependencies
 
   const executeCode = (code, term) => {
     if (!code.trim()) return;

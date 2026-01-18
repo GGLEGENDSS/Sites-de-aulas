@@ -3,6 +3,7 @@ import Layout from './components/Layout';
 import Home from './pages/Home';
 import { ProgressProvider } from './data/ProgressContext';
 import { ThemeProvider } from './data/ThemeContext';
+import ErrorBoundary from './components/ErrorBoundary';
 import './index.css';
 import './components/ThemeStyles.css';
 
@@ -20,8 +21,9 @@ import Glossary from './pages/Glossary';
 
 function App() {
   return (
-    <ThemeProvider>
-      <ProgressProvider>
+    <ErrorBoundary>
+      <ThemeProvider>
+        <ProgressProvider>
       <Router>
         <Layout>
           <Routes>
@@ -41,6 +43,7 @@ function App() {
       </Router>
     </ProgressProvider>
     </ThemeProvider>
+    </ErrorBoundary>
   );
 }
 
