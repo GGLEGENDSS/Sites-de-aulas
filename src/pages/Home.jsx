@@ -1,6 +1,5 @@
 import { useNavigate } from 'react-router-dom';
 import { ChevronRight, Gamepad2, Trophy, Zap } from 'lucide-react';
-import TechIcon from '../components/TechIcon';
 import './Home.css';
 
 const tracks = [
@@ -9,7 +8,7 @@ const tracks = [
     title: 'JavaScript Básico',
     description: 'Aprenda a linguagem que move a web, do zero ao primeiro script.',
     lessons: 12,
-    icon: <TechIcon type="javascript" />,
+    icon: '📝',
     color: 'rgba(247, 223, 30, 0.1)',
     firstLesson: 'js-1'
   },
@@ -18,7 +17,7 @@ const tracks = [
     title: 'Roblox Masterclass (Lua)',
     description: 'Domine a lógica por trás dos jogos de sucesso no Roblox.',
     lessons: 20,
-    icon: <TechIcon type="roblox" />,
+    icon: '🎮',
     color: 'rgba(255, 255, 255, 0.1)',
     firstLesson: 'lua-roblox-1'
   },
@@ -27,7 +26,7 @@ const tracks = [
     title: 'Python Essentials',
     description: 'Automação, dados e scripts poderosos com a sintaxe mais amada.',
     lessons: 15,
-    icon: <TechIcon type="python" />,
+    icon: '🐍',
     color: 'rgba(55, 118, 171, 0.1)',
     firstLesson: 'python-1'
   },
@@ -36,7 +35,7 @@ const tracks = [
     title: 'Java para Empresas',
     description: 'Aprenda a linguagem robusta usada por grandes corporações.',
     lessons: 10,
-    icon: <TechIcon type="java" />,
+    icon: '☕',
     color: 'rgba(237, 29, 37, 0.1)',
     firstLesson: 'java-1'
   },
@@ -45,7 +44,7 @@ const tracks = [
     title: 'C++ Masterclass',
     description: 'Alta performance, sistemas e o coração da computação moderna.',
     lessons: 100,
-    icon: <TechIcon type="cpp" />,
+    icon: '⚙️',
     color: 'rgba(0, 89, 156, 0.1)',
     firstLesson: 'cpp-1'
   }

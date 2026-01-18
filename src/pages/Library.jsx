@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { Book, Search, ExternalLink, Code, Layers, Server, Zap, Terminal as TermIcon } from 'lucide-react';
-import TechIcon from '../components/TechIcon';
 import './Library.css';
 
 const libraryContent = [
@@ -192,7 +191,7 @@ const Library = () => {
               className={`library-item ${selectedTopic?.id === item.id ? 'active' : ''}`}
               onClick={() => setSelectedTopic(item)}
             >
-              {item.techType ? <TechIcon type={item.techType} size={24} /> : item.icon}
+              {item.icon}
               <div className="item-meta">
                 <span className="item-lang">{item.language}</span>
                 <span className="item-title">{item.title}</span>

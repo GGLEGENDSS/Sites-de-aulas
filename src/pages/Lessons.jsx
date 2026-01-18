@@ -1,5 +1,4 @@
 import { useNavigate } from 'react-router-dom';
-import TechIcon from '../components/TechIcon';
 import { ChevronRight, Star } from 'lucide-react';
 import './Lessons.css';
 
@@ -25,7 +24,7 @@ const Lessons = () => {
         {tracks.map(track => (
           <div key={track.id} className="track-row glass" onClick={() => navigate(`/lesson/${track.type}-1`)}>
             <div className="track-main-info">
-              <TechIcon type={track.type} size={40} />
+              <span style={{fontSize: '40px'}}>{['javascript', 'python', 'lua', 'cpp', 'database'].includes(track.type) ? ['📝', '🐍', '🎮', '⚙️', '🗄️'][['javascript', 'python', 'lua', 'cpp', 'database'].indexOf(track.type)] : '📚'}</span>
               <div className="track-text">
                 <h3>{track.title}</h3>
                 <span className="track-tag">{track.level}</span>
