@@ -1,0 +1,70 @@
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  position: relative;
+  cursor: pointer;
+}
+
+.logo-glow {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  background: var(--primary);
+  filter: blur(30px);
+  opacity: 0.3;
+  left: -10px;
+  z-index: 0;
+}
+
+.logo-icon-wrapper {
+  background: linear-gradient(135deg, var(--bg-card) 0%, #1a1f29 100%);
+  border: 1px solid var(--border);
+  padding: 8px;
+  border-radius: 12px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+}
+
+.logo-icon {
+  color: var(--primary);
+  filter: drop-shadow(0 0 8px var(--primary-dark));
+}
+
+.logo-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+  z-index: 1;
+}
+
+.brand-code {
+  font-size: 1.4rem;
+  font-weight: 900;
+  color: #fff;
+  letter-spacing: -0.5px;
+}
+
+.brand-academy {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-top: 2px;
+}
+
+.brand-badge {
+  background: linear-gradient(90deg, var(--primary) 0%, var(--primary-dark) 100%);
+  color: #fff;
+  font-size: 0.65rem;
+  font-weight: 800;
+  padding: 3px 8px;
+  border-radius: 6px;
+  width: fit-content;
+  margin-top: 6px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
