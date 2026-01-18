@@ -40,6 +40,7 @@ function App() {
         </Layout>
       </Router>
     </ProgressProvider>
+    </ThemeProvider>
   );
 }
 
