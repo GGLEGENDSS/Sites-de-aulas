@@ -27,23 +27,27 @@ function App() {
       <ThemeProvider>
         <ProgressProvider>
       <Router>
-        <Layout>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/blitz" element={<CodeBlitz />} />
-            <Route path="/lessons" element={<Lessons />} />
-            <Route path="/lesson/:id" element={<LessonPage />} />
-            <Route path="/library" element={<Library />} />
-            <Route path="/database" element={<Database />} />
-            <Route path="/api-hub" element={<APIHub />} />
-            <Route path="/roadmaps" element={<Roadmaps />} />
-            <Route path="/glossary" element={<Glossary />} />
-            <Route path="/ranking" element={<Ranking />} />
-            <Route path="/games" element={<Games />} />
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/login" element={<Login />} />
-          </Routes>
-        </Layout>
+        <Routes>
+          <Route path="/login" element={<Login />} />
+          <Route path="*" element={
+            <Layout>
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/blitz" element={<CodeBlitz />} />
+                <Route path="/lessons" element={<Lessons />} />
+                <Route path="/lesson/:id" element={<LessonPage />} />
+                <Route path="/library" element={<Library />} />
+                <Route path="/database" element={<Database />} />
+                <Route path="/api-hub" element={<APIHub />} />
+                <Route path="/roadmaps" element={<Roadmaps />} />
+                <Route path="/glossary" element={<Glossary />} />
+                <Route path="/ranking" element={<Ranking />} />
+                <Route path="/games" element={<Games />} />
+                <Route path="/profile" element={<Profile />} />
+              </Routes>
+            </Layout>
+          } />
+        </Routes>
       </Router>
     </ProgressProvider>
     </ThemeProvider>
