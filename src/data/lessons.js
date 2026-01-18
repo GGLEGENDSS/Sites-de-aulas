@@ -317,11 +317,11 @@ export const lessons = [
 
   // JavaScript Curriculum (200 Lessons - EXPANDED)
   ...Array.from({ length: 200 }).map((_, i) => ({
-    id: \`js-\${i + 1}\`,
+    id: `js-${i + 1}`,
     title: i < 1 ? 'O Poder das Variáveis' : 
-           i < 50 ? \`JavaScript Fundamentos \${i + 1}\` :
-           i < 100 ? \`JavaScript Intermediário \${i + 1}\` :
-           i < 150 ? \`JavaScript Avançado \${i + 1}\` :
+           i < 50 ? `JavaScript Fundamentos ${i + 1}` :
+           i < 100 ? `JavaScript Intermediário ${i + 1}` :
+           i < 150 ? `JavaScript Avançado ${i + 1}` :
            `JavaScript Expert - Projeto ${i - 149}`,
     track: 'javascript',
     explanation: `

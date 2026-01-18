@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Zap, Award, Brain, Gauge } from 'lucide-react';
-import { TypingChallenge } from '../components/games/TypingChallenge';
+import TypingChallenge from '../components/games/TypingChallenge';
 import { LogicQuiz } from '../components/games/LogicQuiz';
 import { MemoryGame } from '../components/games/MemoryGame';
 import { ReflexGame } from '../components/games/ReflexGame';
