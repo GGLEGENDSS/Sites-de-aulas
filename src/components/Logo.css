@@ -1,70 +1,86 @@
 .logo-container {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 12px;
   position: relative;
   cursor: pointer;
 }
 
 .logo-glow {
   position: absolute;
-  width: 50px;
-  height: 50px;
-  background: var(--primary);
-  filter: blur(30px);
-  opacity: 0.3;
-  left: -10px;
+  width: 60px;
+  height: 60px;
+  background: radial-gradient(circle, rgba(0,242,255,0.4) 0%, rgba(0,0,0,0) 70%);
+  filter: blur(10px);
+  left: 0;
   z-index: 0;
 }
 
 .logo-icon-wrapper {
-  background: linear-gradient(135deg, var(--bg-card) 0%, #1a1f29 100%);
-  border: 1px solid var(--border);
-  padding: 8px;
-  border-radius: 12px;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  background: transparent;
+  width: 50px;
+  height: 50px;
+  position: relative;
   z-index: 1;
 }
 
-.logo-icon {
-  color: var(--primary);
-  filter: drop-shadow(0 0 8px var(--primary-dark));
+.revolutionary-logo-svg {
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 0 5px rgba(0, 242, 255, 0.5));
+}
+
+.ring-outer {
+  transform-origin: 50px 50px;
+  animation: spin 10s linear infinite;
+}
+
+.ring-inner {
+  transform-origin: 50px 50px;
+  animation: pulse-scale 3s ease-in-out infinite;
+}
+
+.data-stream {
+  animation: dash 2s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes pulse-scale {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(0.9); }
+}
+
+@keyframes dash {
+  to { stroke-dashoffset: -20; }
 }
 
 .logo-text {
   display: flex;
   flex-direction: column;
-  line-height: 1;
+  line-height: 0.9;
   z-index: 1;
 }
 
 .brand-code {
-  font-size: 1.4rem;
+  font-size: 1.5rem;
   font-weight: 900;
   color: #fff;
-  letter-spacing: -0.5px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  background: linear-gradient(to right, #fff, #aaa);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .brand-academy {
-  font-size: 0.85rem;
+  font-size: 0.7rem;
   font-weight: 700;
-  color: var(--text-muted);
+  color: #00f2ff;
   text-transform: uppercase;
-  letter-spacing: 2px;
-  margin-top: 2px;
-}
-
-.brand-badge {
-  background: linear-gradient(90deg, var(--primary) 0%, var(--primary-dark) 100%);
-  color: #fff;
-  font-size: 0.65rem;
-  font-weight: 800;
-  padding: 3px 8px;
-  border-radius: 6px;
-  width: fit-content;
-  margin-top: 6px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  letter-spacing: 3px;
 }

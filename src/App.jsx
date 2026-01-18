@@ -17,6 +17,7 @@ import Database from './pages/Database';
 import APIHub from './pages/APIHub';
 import Roadmaps from './pages/Roadmaps';
 import Glossary from './pages/Glossary';
+import Login from './pages/Login';
 
 
 function App() {
@@ -37,7 +38,9 @@ function App() {
             <Route path="/roadmaps" element={<Roadmaps />} />
             <Route path="/glossary" element={<Glossary />} />
             <Route path="/ranking" element={<Ranking />} />
+            <Route path="/ranking" element={<Ranking />} />
             <Route path="/profile" element={<Profile />} />
+            <Route path="/login" element={<Login />} />
           </Routes>
         </Layout>
       </Router>

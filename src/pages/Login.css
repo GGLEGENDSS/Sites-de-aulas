@@ -1,0 +1,220 @@
+/* Login Page Styles */
+
+/* Glass Card Effect */
+.glass-card {
+  background: rgba(20, 23, 30, 0.7);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+/* Input Focus Effects */
+input:focus {
+  outline: none;
+  border-color: #58cc02 !important;
+  box-shadow: 0 0 20px rgba(88, 204, 2, 0.3);
+  transition: all 0.3s ease;
+}
+
+/* Button Hover Effects */
+button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(88, 204, 2, 0.2);
+}
+
+button:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+/* Loader Animation */
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
+
+/* Error Message Animation */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Success Message Animation */
+@keyframes slideSuccess {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Disabled State */
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+input:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Label Styling */
+label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+/* Form Spacing */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+/* Input Base Styling */
+input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border-radius: 0.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(0, 0, 0, 0.3);
+  color: white;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+input::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+/* Tooltip Effect for Password Requirements */
+.password-requirement {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0;
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.6);
+  transition: color 0.3s ease;
+}
+
+.password-requirement.met {
+  color: #58cc02;
+}
+
+/* Mobile Optimization */
+@media (max-width: 640px) {
+  .glass-card {
+    padding: 1.25rem;
+    border-radius: 1.5rem;
+  }
+
+  input {
+    padding: 0.65rem 0.85rem;
+    font-size: 0.95rem;
+  }
+
+  button {
+    padding: 0.55rem 0.9rem;
+    font-size: 0.9rem;
+  }
+
+  label {
+    font-size: 0.8rem;
+  }
+
+  h1 {
+    font-size: 1.1rem;
+  }
+}
+
+/* Tablet Optimization */
+@media (min-width: 641px) and (max-width: 1024px) {
+  .glass-card {
+    padding: 1.75rem;
+  }
+
+  input {
+    padding: 0.7rem 0.95rem;
+    font-size: 0.98rem;
+  }
+}
+
+/* Desktop Optimization */
+@media (min-width: 1025px) {
+  .glass-card {
+    padding: 2rem;
+  }
+
+  button:hover:not(:disabled) {
+    transform: translateY(-3px);
+  }
+}
+
+/* Animation for form transitions */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Text Link Styling */
+a {
+  color: #58cc02;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+a:hover {
+  text-decoration: underline;
+  color: #46a302;
+}
+
+/* Icon Styling */
+svg {
+  transition: all 0.3s ease;
+}
+
+button:hover:not(:disabled) svg {
+  transform: scale(1.1);
+}
+
+/* Responsive Typography */
+@media (max-width: 480px) {
+  html {
+    font-size: 14px;
+  }
+}
+
+@media (min-width: 481px) and (max-width: 768px) {
+  html {
+    font-size: 15px;
+  }
+}
+
+@media (min-width: 769px) {
+  html {
+    font-size: 16px;
+  }
+}
+

@@ -3,7 +3,7 @@ import { Award, Zap, Book, Flame, Star, Trophy, TrendingUp } from 'lucide-react'
 import './Profile.css';
 
 const Profile = () => {
-  const { stats, completedLessons } = useProgress();
+  const { stats, completedLessons, user, logout } = useProgress();
 
   const medals = [
     { id: 'first', name: 'Primeiros Passos', icon: '🚀', unlocked: completedLessons.length > 0 },
@@ -26,13 +26,30 @@ const Profile = () => {
 
   const maxXP = Math.max(...weeklyXP.map(d => d.xp));
 
+  if (!user) {
+    return (
+      <div className="profile-container flex items-center justify-center h-full">
+         <p>Faça login para ver seu perfil.</p>
+      </div>
+    );
+  }
+
   return (
     <div className="profile-container fadeIn">
-      <header className="profile-header glass">
-        <div className="profile-avatar">G</div>
+      <header className="profile-header glass relative">
+        <button 
+          onClick={logout}
+          className="absolute top-4 right-4 bg-red-500/10 text-red-400 hover:bg-red-500/20 px-4 py-2 rounded-lg text-sm font-medium transition-colors"
+        >
+          Sair da conta
+        </button>
+
+        <div className="profile-avatar overflow-hidden">
+          {user.photoURL ? <img src={user.photoURL} alt={user.displayName} className="w-full h-full object-cover" /> : user.email[0].toUpperCase()}
+        </div>
         <div className="profile-main-info">
-          <h1>Gomes Code</h1>
-          <p>Membro desde Janeiro 2026</p>
+          <h1>{user.displayName || 'Estudante'}</h1>
+          <p>Membro desde {new Date(user.metadata.creationTime).toLocaleDateString('pt-BR', { month: 'long', year: 'numeric' })}</p>
           <div className="level-badge">Lvl {stats.level}</div>
         </div>
         <div className="profile-stats-grid">
@@ -51,7 +68,7 @@ const Profile = () => {
             </div>
           </div>
           <div className="p-stat-card">
-             <Book size={24} color="#3776ab" />
+            <Book size={24} color="#3776ab" />
             <div className="p-stat-val">
               <span>Lições</span>
               <strong>{completedLessons.length}</strong>

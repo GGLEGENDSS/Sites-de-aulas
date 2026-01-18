@@ -1,6 +1,6 @@
 import { useNavigate, Link, useLocation } from 'react-router-dom';
 import { useState } from 'react';
-import { Home, Compass, BookOpen, Terminal, User, Search, Zap, Book, Trophy, Database, MapPin, Sun, Moon } from 'lucide-react';
+import { Home, Compass, BookOpen, Terminal, User, Search, Zap, Book, Trophy, Database, MapPin, Sun, Moon, Instagram } from 'lucide-react';
 import { useProgress } from '../data/ProgressContext';
 import { useTheme } from '../data/ThemeContext';
 import { lessons } from '../data/lessons';
@@ -12,7 +12,7 @@ const Layout = ({ children }) => {
   const location = useLocation();
   const navigate = useNavigate();
   const [search, setSearch] = useState('');
-  const { stats } = useProgress();
+  const { stats, user } = useProgress();
   const { theme, toggleTheme } = useTheme();
 
   const handleSearch = (e) => {
@@ -89,6 +89,11 @@ const Layout = ({ children }) => {
             <User size={24} />
             <span>Perfil</span>
           </Link>
+          <div className="nav-divider my-2 border-t border-white/10"></div>
+          <a href="https://www.instagram.com/ggabe15?igsh=bnozd3V6a3BramVv" target="_blank" rel="noopener noreferrer" className="nav-item">
+            <Instagram size={24} />
+            <span>Instagram</span>
+          </a>
         </nav>
       </aside>
 
@@ -114,7 +119,15 @@ const Layout = ({ children }) => {
             <div className="xp-badge">
                ⚡ <span>{stats.xp} XP</span>
             </div>
-            <Link to="/profile" className="avatar">G</Link>
+            {user ? (
+               <Link to="/profile" className="avatar overflow-hidden flex items-center justify-center">
+                  {user.photoURL ? <img src={user.photoURL} alt="User" className="w-full h-full object-cover" /> : user.email[0].toUpperCase()}
+               </Link>
+            ) : (
+                <Link to="/login" className="login-btn bg-white/10 hover:bg-white/20 px-4 py-2 rounded-lg text-sm font-medium transition-colors">
+                  Entrar
+                </Link>
+            )}
           </div>
         </header>
         <div className="content">
