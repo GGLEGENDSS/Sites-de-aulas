@@ -2,12 +2,12 @@ import { initializeApp } from "firebase/app";
 import { getAuth, GoogleAuthProvider } from "firebase/auth";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyD9kMXGrGw8seEd3cpUoUeDGPh6oxILbek",
-  authDomain: "aprendendo-a-coda.firebaseapp.com",
-  projectId: "aprendendo-a-coda",
-  storageBucket: "aprendendo-a-coda.firebasestorage.app",
-  messagingSenderId: "431538392332",
-  appId: "1:431538392332:web:ff46c7a6279234cd694d29"
+  apiKey: "AIzaSyCW2j2Yr-AzA-eLrL4N01d2zBIC_PXvcko",
+  authDomain: "flutter-ai-playground-f021c.firebaseapp.com",
+  projectId: "flutter-ai-playground-f021c",
+  storageBucket: "flutter-ai-playground-f021c.firebasestorage.app",
+  messagingSenderId: "751993855548",
+  appId: "1:751993855548:web:b2ad2c6cfb50dc483e2d39"
 };
 
 const app = initializeApp(firebaseConfig);
