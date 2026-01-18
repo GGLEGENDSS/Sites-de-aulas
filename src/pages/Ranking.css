@@ -60,6 +60,43 @@
   border-color: #58cc02;
 }
 
+/* Language Filter */
+.language-filter {
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  padding: 1rem;
+  background: rgba(88, 204, 2, 0.05);
+  border-radius: 1rem;
+  border: 1px solid rgba(88, 204, 2, 0.2);
+}
+
+.lang-btn {
+  padding: 0.6rem 1.2rem;
+  background: rgba(255, 255, 255, 0.05);
+  color: rgba(255, 255, 255, 0.7);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0.5rem;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+}
+
+.lang-btn:hover {
+  color: #58cc02;
+  border-color: #58cc02;
+  background: rgba(88, 204, 2, 0.1);
+}
+
+.lang-btn.active {
+  background: rgba(88, 204, 2, 0.3);
+  color: #58cc02;
+  border-color: #58cc02;
+  transform: scale(1.05);
+}
+
 .ranking-stats {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));

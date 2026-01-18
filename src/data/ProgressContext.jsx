@@ -10,7 +10,20 @@ export const ProgressProvider = ({ children }) => {
 
   // Load initial state only after user is determined
   const [completedLessons, setCompletedLessons] = useState([]);
-  const [stats, setStats] = useState({ xp: 0, streak: 3, level: 1 });
+  const [stats, setStats] = useState({ 
+    xp: 0, 
+    streak: 0, 
+    level: 1,
+    lastLoginDate: null
+  });
+  const [languageLevels, setLanguageLevels] = useState({
+    javascript: 0,
+    python: 0,
+    cpp: 0,
+    lua: 0,
+    database: 0
+  });
+  const [completedMissions, setCompletedMissions] = useState([]);
   const [visualState, setVisualState] = useState({});
 
   // Monitor Auth State
@@ -29,9 +42,30 @@ export const ProgressProvider = ({ children }) => {
         // Load for specific user
         const savedLessons = localStorage.getItem(`completedLessons_${user.uid}`);
         const savedStats = localStorage.getItem(`userStats_${user.uid}`);
+        const savedLanguageLevels = localStorage.getItem(`languageLevels_${user.uid}`);
+        const savedMissions = localStorage.getItem(`completedMissions_${user.uid}`);
         
         setCompletedLessons(savedLessons ? JSON.parse(savedLessons) : []);
-        setStats(savedStats ? JSON.parse(savedStats) : { xp: 0, streak: 0, level: 1 });
+        setStats(savedStats ? JSON.parse(savedStats) : { xp: 0, streak: 0, level: 1, lastLoginDate: null });
+        setLanguageLevels(savedLanguageLevels ? JSON.parse(savedLanguageLevels) : {
+          javascript: 0,
+          python: 0,
+          cpp: 0,
+          lua: 0,
+          database: 0
+        });
+        setCompletedMissions(savedMissions ? JSON.parse(savedMissions) : []);
+        
+        // Atualizar streak baseado na data do último login
+        const today = new Date().toDateString();
+        const savedStats2 = savedStats ? JSON.parse(savedStats) : { lastLoginDate: null };
+        const lastLogin = savedStats2.lastLoginDate;
+        
+        if (lastLogin !== today) {
+          const yesterday = new Date(Date.now() - 86400000).toDateString();
+          let newStreak = (lastLogin === yesterday) ? (savedStats2.streak || 0) + 1 : 1;
+          setStats(prev => ({ ...prev, lastLoginDate: today, streak: newStreak }));
+        }
         
         // Salvar nome do usuário para o ranking
         if (user.displayName) {
@@ -40,7 +74,15 @@ export const ProgressProvider = ({ children }) => {
       } else {
         // No user? Reset or keep default (could also be empty)
         setCompletedLessons([]);
-        setStats({ xp: 0, streak: 0, level: 1 });
+        setStats({ xp: 0, streak: 0, level: 1, lastLoginDate: null });
+        setLanguageLevels({
+          javascript: 0,
+          python: 0,
+          cpp: 0,
+          lua: 0,
+          database: 0
+        });
+        setCompletedMissions([]);
       }
     }
   }, [user, loading]);
@@ -49,14 +91,11 @@ export const ProgressProvider = ({ children }) => {
   useEffect(() => {
     if (user) {
       localStorage.setItem(`completedLessons_${user.uid}`, JSON.stringify(completedLessons));
-    }
-  }, [completedLessons, user]);
-
-  useEffect(() => {
-    if (user) {
       localStorage.setItem(`userStats_${user.uid}`, JSON.stringify(stats));
+      localStorage.setItem(`languageLevels_${user.uid}`, JSON.stringify(languageLevels));
+      localStorage.setItem(`completedMissions_${user.uid}`, JSON.stringify(completedMissions));
     }
-  }, [stats, user]);
+  }, [completedLessons, stats, languageLevels, completedMissions, user]);
 
   const loginWithGoogle = async () => {
     try {
@@ -76,10 +115,25 @@ export const ProgressProvider = ({ children }) => {
     }
   };
 
-  const completeLesson = (lessonId, xpReward = 10) => {
+  const completeLesson = (lessonId, xpReward = 10, language = null) => {
     if (!completedLessons.includes(lessonId)) {
       setCompletedLessons([...completedLessons, lessonId]);
       setStats(prev => ({ ...prev, xp: prev.xp + xpReward }));
+      
+      // Aumentar nível da linguagem se especificado
+      if (language && languageLevels.hasOwnProperty(language)) {
+        setLanguageLevels(prev => ({
+          ...prev,
+          [language]: prev[language] + 1
+        }));
+      }
+    }
+  };
+
+  const completeMission = (missionId) => {
+    if (!completedMissions.includes(missionId)) {
+      setCompletedMissions([...completedMissions, missionId]);
+      setStats(prev => ({ ...prev, xp: prev.xp + 50 })); // Bônus XP por missão
     }
   };
 
@@ -95,7 +149,11 @@ export const ProgressProvider = ({ children }) => {
       logout,
       completedLessons, 
       stats, 
-      completeLesson, 
+      completeLesson,
+      languageLevels,
+      setLanguageLevels,
+      completedMissions,
+      completeMission,
       visualState, 
       updateVisualState 
     }}>
@@ -104,4 +162,10 @@ export const ProgressProvider = ({ children }) => {
   );
 };
 
-export const useProgress = () => useContext(ProgressContext);
+export const useProgress = () => {
+  const context = useContext(ProgressContext);
+  if (!context) {
+    throw new Error("useProgress must be used within ProgressProvider");
+  }
+  return context;
+};
