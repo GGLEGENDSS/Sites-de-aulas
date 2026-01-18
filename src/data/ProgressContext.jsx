@@ -157,7 +157,7 @@ export const ProgressProvider = ({ children }) => {
       visualState, 
       updateVisualState 
     }}>
-      {!loading && children}
+      {children}
     </ProgressContext.Provider>
   );
 };
