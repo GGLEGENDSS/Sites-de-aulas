@@ -12,11 +12,11 @@ const Ranking = () => {
   const [userRank, setUserRank] = useState(null);
 
   const languages = [
-    { id: 'javascript', name: '📘 JavaScript', icon: '🟨' },
-    { id: 'python', name: '🐍 Python', icon: '🔵' },
-    { id: 'cpp', name: '⚙️ C++', icon: '🔴' },
-    { id: 'lua', name: '🎮 Lua/Roblox', icon: '⚪' },
-    { id: 'database', name: '🗄️ Banco de Dados', icon: '🟢' }
+    { id: 'javascript', name: 'JavaScript', icon: '🟨', color: '#f7df1e' },
+    { id: 'python', name: 'Python', icon: '🐍', color: '#3776ab' },
+    { id: 'cpp', name: 'C++', icon: '⚙️', color: '#00599C' },
+    { id: 'lua', name: 'Lua/Roblox', icon: '🎮', color: '#000080' },
+    { id: 'database', name: 'Banco de Dados', icon: '🗄️', color: '#4db33d' }
   ];
 
   // Função para obter todos os usuários com todas as métricas
@@ -157,8 +157,13 @@ const Ranking = () => {
               key={lang.id}
               className={`lang-btn ${languageFilter === lang.id ? 'active' : ''}`}
               onClick={() => setLanguageFilter(lang.id)}
+              style={{
+                borderColor: languageFilter === lang.id ? lang.color : 'rgba(255, 255, 255, 0.1)',
+                backgroundColor: languageFilter === lang.id ? `${lang.color}20` : 'rgba(255, 255, 255, 0.05)',
+                color: languageFilter === lang.id ? lang.color : 'rgba(255, 255, 255, 0.7)'
+              }}
             >
-              {lang.icon} {lang.name}
+              <span style={{ fontSize: '1.3em' }}>{lang.icon}</span> {lang.name}
             </button>
           ))}
         </div>
