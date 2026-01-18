@@ -1,10 +1,19 @@
 /* Login Page Styles */
 
+/* Prevent Layout Shift */
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
 /* Glass Card Effect */
 .glass-card {
   background: rgba(20, 23, 30, 0.7);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
+  will-change: transform;
+  backface-visibility: hidden;
+  perspective: 1000px;
 }
 
 /* Input Focus Effects */

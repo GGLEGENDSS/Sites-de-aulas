@@ -29,10 +29,14 @@ const Login = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (user) {
-      navigate('/');
+    if (user && !loading) {
+      // Delay pequeno para evitar piscamento
+      const timer = setTimeout(() => {
+        navigate('/');
+      }, 300);
+      return () => clearTimeout(timer);
     }
-  }, [user, navigate]);
+  }, [user, loading, navigate]);
 
   // Validação de Email
   const isValidEmail = (email) => {
