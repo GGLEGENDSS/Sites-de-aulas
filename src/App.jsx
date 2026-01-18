@@ -2,7 +2,9 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Layout from './components/Layout';
 import Home from './pages/Home';
 import { ProgressProvider } from './data/ProgressContext';
+import { ThemeProvider } from './data/ThemeContext';
 import './index.css';
+import './components/ThemeStyles.css';
 
 import LessonPage from './pages/LessonPage';
 import CodeBlitz from './components/CodeBlitz';
@@ -18,7 +20,8 @@ import Glossary from './pages/Glossary';
 
 function App() {
   return (
-    <ProgressProvider>
+    <ThemeProvider>
+      <ProgressProvider>
       <Router>
         <Layout>
           <Routes>

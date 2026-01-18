@@ -1,7 +1,8 @@
 import { useNavigate, Link, useLocation } from 'react-router-dom';
 import { useState } from 'react';
-import { Home, Compass, BookOpen, Terminal, User, Search, Zap, Book, Trophy, Database, MapPin } from 'lucide-react';
+import { Home, Compass, BookOpen, Terminal, User, Search, Zap, Book, Trophy, Database, MapPin, Sun, Moon } from 'lucide-react';
 import { useProgress } from '../data/ProgressContext';
+import { useTheme } from '../data/ThemeContext';
 import { lessons } from '../data/lessons';
 import Logo from './Logo';
 import './Layout.css';
@@ -12,6 +13,7 @@ const Layout = ({ children }) => {
   const navigate = useNavigate();
   const [search, setSearch] = useState('');
   const { stats } = useProgress();
+  const { theme, toggleTheme } = useTheme();
 
   const handleSearch = (e) => {
     const term = e.target.value;
@@ -103,6 +105,9 @@ const Layout = ({ children }) => {
             />
           </div>
           <div className="user-info">
+            <button className="theme-toggle" onClick={toggleTheme} title="Alternar tema">
+              {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
+            </button>
             <div className="streak">
               🔥 <span>{stats.streak} dias</span>
             </div>

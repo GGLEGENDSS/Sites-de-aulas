@@ -4,11 +4,11 @@ import { ChevronRight, Star } from 'lucide-react';
 import './Lessons.css';
 
 const tracks = [
-  { id: 'javascript', title: 'JavaScript Básico', lessons: 100, level: 'Fundamentos', type: 'javascript' },
-  { id: 'python', title: 'Python Essentials', lessons: 100, level: 'Automação', type: 'python' },
-  { id: 'lua', title: 'Roblox Masterclass', lessons: 100, level: 'Game Dev', type: 'roblox' },
-  { id: 'cpp', title: 'C++ Masterclass', lessons: 100, level: 'Sistemas', type: 'cpp' },
-  { id: 'database', title: 'Banco de Dados', lessons: 50, level: 'Backend', type: 'database' },
+  { id: 'javascript', title: 'JavaScript Básico', lessons: 200, level: 'Fundamentos → Expert', type: 'javascript' },
+  { id: 'python', title: 'Python Essentials', lessons: 200, level: 'Automação → Expert', type: 'python' },
+  { id: 'lua', title: 'Roblox Masterclass', lessons: 200, level: 'Game Dev → Expert', type: 'roblox' },
+  { id: 'cpp', title: 'C++ Masterclass', lessons: 200, level: 'Sistemas → Expert', type: 'cpp' },
+  { id: 'database', title: 'Banco de Dados', lessons: 100, level: 'Backend → Expert', type: 'database' },
 ];
 
 const Lessons = () => {
@@ -18,7 +18,7 @@ const Lessons = () => {
     <div className="lessons-page fadeIn">
       <header className="lessons-header">
         <h1>Suas Trilhas de Aprendizado</h1>
-        <p>Você tem 500 lições disponíveis para dominar a programação.</p>
+        <p>Você tem 1200 lições disponíveis para dominar a programação profissional.</p>
       </header>
 
       <div className="tracks-list">

@@ -91,87 +91,140 @@ export const lessons = [
   },
   // --- MASSIVE CURRICULUM SCALING (100 PER TRACK) ---
 
-  // JavaScript Curriculum (100 Lessons)
-  ...Array.from({ length: 100 }).map((_, i) => ({
+  // JavaScript Curriculum (200 Lessons - EXPANDED)
+  ...Array.from({ length: 200 }).map((_, i) => ({
     id: `js-${i + 1}`,
-    title: i < 1 ? 'O Poder das Variáveis' : `JavaScript Nível ${i + 1}`,
+    title: i < 1 ? 'O Poder das Variáveis' : 
+           i < 50 ? `JavaScript Fundamentos ${i + 1}` :
+           i < 100 ? `JavaScript Intermediário ${i + 1}` :
+           i < 150 ? `JavaScript Avançado ${i + 1}` :
+           `JavaScript Expert - Projeto ${i - 149}`,
     track: 'javascript',
     explanation: `
-      ## Módulo ${i + 1}: ${i < 25 ? 'Fundamentos' : i < 50 ? 'Lógica Médios' : i < 75 ? 'Domínio da Web' : 'Sênior Architecture'}
-      Aprofunde-se no passo ${i + 1} da sua jornada. Aqui você aprende ${i < 50 ? 'como o computador pensa' : 'como sistemas complexos são construídos'}.
+      ## Módulo ${i + 1}: ${
+        i < 50 ? 'Fundamentos' : 
+        i < 100 ? 'Lógica e DOM' : 
+        i < 150 ? 'Async & APIs' : 
+        'Projetos Reais'
+      }
+      ${i >= 150 ? `
+      ### Projeto Prático
+      Neste módulo você vai construir um projeto real do zero!
+      ${i === 150 ? '- **Calculadora Interativa**' : ''}
+      ${i === 151 ? '- **To-Do List com LocalStorage**' : ''}
+      ${i === 152 ? '- **Weather App com API**' : ''}
+      ` : `Aprofunde-se no passo ${i + 1} da sua jornada JavaScript.`}
     `,
-    instructions: `Execute o comando: \`let xp_${i} = ${i * 10};\``,
-    challenge: (input) => input.includes(`let xp_${i} = ${i * 10}`),
-    hint: `Use let xp_${i} = ${i * 10};`
+    instructions: i >= 150 ? 
+      `Projeto: Crie uma função que ${['calcula', 'salva', 'busca'][i % 3]} dados` :
+      `Execute o comando: \`let xp_${i} = ${i * 10};\``,
+    challenge: (input) => i >= 150 ? 
+      input.includes('function') || input.includes('=>') :
+      input.includes(`let xp_${i} = ${i * 10}`),
+    hint: i >= 150 ? 'Crie uma função usando function ou arrow function' : `Use let xp_${i} = ${i * 10};`
   })),
 
-  // Python Curriculum (100 Lessons)
-  ...Array.from({ length: 100 }).map((_, i) => ({
+  // Python Curriculum (200 Lessons - EXPANDED)
+  ...Array.from({ length: 200 }).map((_, i) => ({
     id: `python-${i + 1}`,
-    title: `Python Essentials ${i + 1}`,
+    title: i < 50 ? `Python Básico ${i + 1}` :
+           i < 100 ? `Python Intermediário ${i + 1}` :
+           i < 150 ? `Python Avançado ${i + 1}` :
+           `Python Expert - Projeto ${i - 149}`,
     track: 'python',
     explanation: `
       ## Python Módulo ${i + 1}
-      Dominando a sintaxe limpa e automações poderosas.
+      ${i >= 150 ? `### Projeto: ${['Automação de Tarefas', 'Web Scraper', 'Data Analysis'][i % 3]}` : 'Dominando Python passo a passo.'}
     `,
-    instructions: `Crie a variável: \`let py_data_${i} = true;\``,
-    challenge: (input) => input.includes(`let py_data_${i} = true`),
-    hint: 'Siga a instrução.'
+    instructions: i >= 150 ?
+      `Crie uma função Python que processa dados` :
+      `Crie a variável: \`let py_data_${i} = true;\``,
+    challenge: (input) => i >= 150 ?
+      input.includes('def ') || input.includes('function') :
+      input.includes(`let py_data_${i} = true`),
+    hint: i >= 150 ? 'Use def nome_funcao():' : 'Siga a instrução.'
   })),
 
-  // Java Curriculum (100 Lessons)
-  ...Array.from({ length: 100 }).map((_, i) => ({
+  // Java Curriculum (200 Lessons - EXPANDED)
+  ...Array.from({ length: 200 }).map((_, i) => ({
     id: `java-${i + 1}`,
-    title: `Java Enterprise ${i + 1}`,
+    title: i < 50 ? `Java Fundamentos ${i + 1}` :
+           i < 100 ? `Java OOP ${i + 1}` :
+           i < 150 ? `Java Enterprise ${i + 1}` :
+           `Java Expert - Projeto ${i - 149}`,
     track: 'java',
     explanation: `
       ## Java Nível ${i + 1}
-      Tipagem forte e padrões de projeto para grandes sistemas.
+      ${i >= 150 ? `### Projeto Enterprise: ${['Sistema de Login', 'API REST', 'Microservice'][i % 3]}` : 'Tipagem forte e padrões de projeto.'}
     `,
-    instructions: `Defina o estado: \`let java_core_${i} = "active";\``,
-    challenge: (input) => input.includes(`let java_core_${i} = "active"`),
-    hint: 'Use aspas para strings.'
+    instructions: i >= 150 ?
+      `Crie uma classe Java com métodos` :
+      `Defina o estado: \`let java_core_${i} = "active";\``,
+    challenge: (input) => i >= 150 ?
+      input.includes('class ') || input.includes('public') :
+      input.includes(`let java_core_${i} = "active"`),
+    hint: i >= 150 ? 'Use public class NomeDaClasse' : 'Use aspas para strings.'
   })),
 
-  // Roblox/Lua Curriculum (100 Lessons)
-  ...Array.from({ length: 100 }).map((_, i) => ({
+  // Roblox/Lua Curriculum (200 Lessons - EXPANDED)
+  ...Array.from({ length: 200 }).map((_, i) => ({
     id: `lua-roblox-${i + 1}`,
-    title: `Roblox Masterclass ${i + 1}`,
+    title: i < 50 ? `Roblox Básico ${i + 1}` :
+           i < 100 ? `Roblox Game Dev ${i + 1}` :
+           i < 150 ? `Roblox Avançado ${i + 1}` :
+           `Roblox Expert - Projeto ${i - 149}`,
     track: 'lua',
     explanation: `
       ## Roblox/Lua ${i + 1}
-      Manipulando o Workspace e criando mecânicas de jogo incríveis.
+      ${i >= 150 ? `### Projeto de Jogo: ${['Obby Completo', 'Sistema de Inventário', 'Boss Fight'][i % 3]}` : 'Criando mecânicas de jogo incríveis.'}
     `,
-    instructions: `Simule o objeto: \`let part_${i} = "brick";\``,
-    challenge: (input) => input.includes(`let part_${i} = "brick"`),
-    hint: 'Dê um nome a sua peça.'
+    instructions: i >= 150 ?
+      `Crie um script de jogo completo` :
+      `Simule o objeto: \`let part_${i} = "brick";\``,
+    challenge: (input) => i >= 150 ?
+      input.includes('script') || input.includes('function') :
+      input.includes(`let part_${i} = "brick"`),
+    hint: i >= 150 ? 'Crie uma função de gameplay' : 'Dê um nome a sua peça.'
   })),
 
-  // C++ Masterclass Curriculum (100 Lessons)
-  ...Array.from({ length: 100 }).map((_, i) => ({
+  // C++ Masterclass Curriculum (200 Lessons - EXPANDED)
+  ...Array.from({ length: 200 }).map((_, i) => ({
     id: `cpp-${i + 1}`,
-    title: `C++ Masterclass ${i + 1}`,
+    title: i < 50 ? `C++ Básico ${i + 1}` :
+           i < 100 ? `C++ Intermediário ${i + 1}` :
+           i < 150 ? `C++ Avançado ${i + 1}` :
+           `C++ Expert - Projeto ${i - 149}`,
     track: 'cpp',
     explanation: `
       ## C++ Módulo ${i + 1}
-      Alta performance, gerenciamento de memória e o coração dos sistemas modernos.
+      ${i >= 150 ? `### Projeto de Performance: ${['Game Engine', 'Compilador', 'Sistema Operacional'][i % 3]}` : 'Alta performance e gerenciamento de memória.'}
     `,
-    instructions: `Declare o ponteiro: \`let ptr_${i} = 0x${(i + 100).toString(16)};\``,
-    challenge: (input) => input.includes(`let ptr_${i} = 0x`),
-    hint: 'Simule um endereço de memória hexadecimal.'
+    instructions: i >= 150 ?
+      `Implemente um sistema em C++` :
+      `Declare o ponteiro: \`let ptr_${i} = 0x${(i + 100).toString(16)};\``,
+    challenge: (input) => i >= 150 ?
+      input.includes('class') || input.includes('struct') :
+      input.includes(`let ptr_${i} = 0x`),
+    hint: i >= 150 ? 'Use class ou struct' : 'Simule um endereço de memória hexadecimal.'
   })),
 
-  // Database Curriculum (50 Lessons)
-  ...Array.from({ length: 50 }).map((_, i) => ({
+  // Database Curriculum (100 Lessons - EXPANDED)
+  ...Array.from({ length: 100 }).map((_, i) => ({
     id: `db-${i + 1}`,
-    title: `Database Mastery ${i + 1}`,
+    title: i < 30 ? `SQL Básico ${i + 1}` :
+           i < 60 ? `SQL Avançado ${i + 1}` :
+           `Database Expert - Projeto ${i - 59}`,
     track: 'database',
     explanation: `
       ## Banco de Dados Módulo ${i + 1}
-      Aprendendo a linguagem SQL e as melhores práticas de modelagem de dados.
+      ${i >= 60 ? `### Projeto: ${['E-commerce Database', 'Social Network Schema', 'Analytics System'][i % 3]}` : 'SQL e modelagem de dados profissional.'}
     `,
-    instructions: `Execute o SELECT: \`SELECT * FROM usuarios WHERE id = ${i + 1};\``,
-    challenge: (input) => input.toLowerCase().includes('select') && input.includes(`id = ${i + 1}`),
-    hint: `Use SELECT * FROM usuarios WHERE id = ${i + 1};`
+    instructions: i >= 60 ?
+      `Crie um schema completo de banco de dados` :
+      `Execute o SELECT: \`SELECT * FROM usuarios WHERE id = ${i + 1};\``,
+    challenge: (input) => i >= 60 ?
+      input.toLowerCase().includes('create table') || input.toLowerCase().includes('database') :
+      input.toLowerCase().includes('select') && input.includes(`id = ${i + 1}`),
+    hint: i >= 60 ? 'Use CREATE TABLE nome_tabela' : `Use SELECT * FROM usuarios WHERE id = ${i + 1};`
   }))
 ];
