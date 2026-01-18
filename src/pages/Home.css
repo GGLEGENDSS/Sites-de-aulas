@@ -18,6 +18,54 @@
   font-size: 1.1rem;
 }
 
+.quick-access {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+}
+
+.quick-btn {
+  padding: 1.5rem;
+  background: linear-gradient(135deg, rgba(88, 204, 2, 0.1) 0%, rgba(88, 204, 2, 0.05) 100%);
+  border: 2px solid rgba(88, 204, 2, 0.2);
+  border-radius: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  color: white;
+}
+
+.quick-btn:hover {
+  border-color: #58cc02;
+  background: linear-gradient(135deg, rgba(88, 204, 2, 0.15) 0%, rgba(88, 204, 2, 0.08) 100%);
+  transform: translateX(5px);
+  box-shadow: 0 0 20px rgba(88, 204, 2, 0.3);
+}
+
+.quick-btn svg {
+  color: #58cc02;
+  flex-shrink: 0;
+}
+
+.quick-btn div {
+  flex: 1;
+}
+
+.quick-btn h4 {
+  margin: 0;
+  font-size: 1rem;
+  color: white;
+}
+
+.quick-btn p {
+  margin: 0.25rem 0 0 0;
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.6);
+}
+
 .tracks-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));

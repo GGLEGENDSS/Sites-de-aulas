@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { ChevronRight } from 'lucide-react';
+import { ChevronRight, Gamepad2, Trophy, Zap } from 'lucide-react';
 import TechIcon from '../components/TechIcon';
 import './Home.css';
 
@@ -64,6 +64,33 @@ const Home = () => {
         <h1>O que vamos aprender hoje?</h1>
         <p>Escolha uma trilha e transforme seu conhecimento.</p>
       </section>
+
+      <div className="quick-access">
+        <div className="quick-btn" onClick={() => navigate('/games')}>
+          <Gamepad2 size={24} />
+          <div>
+            <h4>Mini-Jogos</h4>
+            <p>Treinar é se divertir</p>
+          </div>
+          <ChevronRight size={20} />
+        </div>
+        <div className="quick-btn" onClick={() => navigate('/ranking')}>
+          <Trophy size={24} />
+          <div>
+            <h4>Ranking Global</h4>
+            <p>Veja os melhores</p>
+          </div>
+          <ChevronRight size={20} />
+        </div>
+        <div className="quick-btn" onClick={() => navigate('/blitz')}>
+          <Zap size={24} />
+          <div>
+            <h4>CodeBlitz</h4>
+            <p>Desafios rápidos</p>
+          </div>
+          <ChevronRight size={20} />
+        </div>
+      </div>
 
       <div className="tracks-grid">
         {tracks.map((track) => (
