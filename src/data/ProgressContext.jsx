@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/set-state-in-effect, react-refresh/only-export-components */
 import { createContext, useContext, useState, useEffect } from 'react';
 import { auth, googleProvider } from './firebase';
 import { signInWithPopup, signOut, onAuthStateChanged } from 'firebase/auth';
@@ -121,7 +122,7 @@ export const ProgressProvider = ({ children }) => {
       setStats(prev => ({ ...prev, xp: prev.xp + xpReward }));
       
       // Aumentar nível da linguagem se especificado
-      if (language && languageLevels.hasOwnProperty(language)) {
+      if (language && Object.prototype.hasOwnProperty.call(languageLevels, language)) {
         setLanguageLevels(prev => ({
           ...prev,
           [language]: prev[language] + 1

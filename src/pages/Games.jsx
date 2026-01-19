@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Zap, Award, Brain, Gauge } from 'lucide-react';
 import TypingChallenge from '../components/games/TypingChallenge';
@@ -43,6 +43,7 @@ const games = [
 ];
 
 export default function Games() {
+  const MotionDiv = motion.div;
   const [selectedGame, setSelectedGame] = useState(null);
 
   const handlePlayGame = (gameId) => {
@@ -60,7 +61,7 @@ export default function Games() {
           ← Voltar ao Menu
         </button>
         
-        {selectedGame === 'typing' && <TypingChallenge />}
+        {selectedGame === 'typing' && <TypingChallenge onComplete={handleBackToMenu} />}
         {selectedGame === 'logic' && <LogicQuiz />}
         {selectedGame === 'memory' && <MemoryGame />}
         {selectedGame === 'reflex' && <ReflexGame />}
@@ -69,7 +70,7 @@ export default function Games() {
   }
 
   return (
-    <motion.div
+    <MotionDiv
       className="games-page"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
@@ -84,7 +85,7 @@ export default function Games() {
         {games.map((game, index) => {
           const IconComponent = game.icon;
           return (
-            <motion.div
+            <MotionDiv
               key={game.id}
               className="game-card"
               initial={{ opacity: 0, y: 20 }}
@@ -115,12 +116,12 @@ export default function Games() {
               >
                 Jogar Agora
               </button>
-            </motion.div>
+            </MotionDiv>
           );
         })}
       </div>
 
-      <motion.div
+      <MotionDiv
         className="games-info"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -145,7 +146,7 @@ export default function Games() {
             <p>Seu desempenho nos jogos afeta sua posição no ranking global.</p>
           </div>
         </div>
-      </motion.div>
-    </motion.div>
+      </MotionDiv>
+    </MotionDiv>
   );
 }

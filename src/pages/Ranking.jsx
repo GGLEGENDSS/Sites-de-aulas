@@ -1,15 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Trophy, Medal, Flame, Star, Code, Target } from 'lucide-react';
+import { Flame, Star, Code, Target } from 'lucide-react';
 import { useProgress } from '../data/ProgressContext';
 import './Ranking.css';
 
 const Ranking = () => {
-  const { stats, languageLevels, completedMissions, user } = useProgress();
+  const MotionDiv = motion.div;
+  const { stats, languageLevels, user } = useProgress();
   const [rankingCategory, setRankingCategory] = useState('xp'); // xp, streak, languages, missions
   const [languageFilter, setLanguageFilter] = useState('javascript');
-  const [sortedUsers, setSortedUsers] = useState([]);
-  const [userRank, setUserRank] = useState(null);
 
   const languages = [
     { id: 'javascript', name: 'JavaScript', icon: '🟨', color: '#f7df1e' },
@@ -59,57 +58,31 @@ const Ranking = () => {
     return '🌟';
   };
 
-  // Atualizar ranking em tempo real
-  useEffect(() => {
-    const allUsers = getAllUsersWithMetrics();
-    
-    if (allUsers.length === 0) {
-      const mockUsers = [
-        { id: 1, name: 'João Silva', xp: 2500, level: 15, streak: 25, languageLevels: { javascript: 15, python: 10, cpp: 5, lua: 8, database: 6 }, completedMissions: 18, badge: '⭐' },
-        { id: 2, name: 'Maria Santos', xp: 2300, level: 14, streak: 18, languageLevels: { javascript: 14, python: 12, cpp: 8, lua: 10, database: 7 }, completedMissions: 15, badge: '🏆' },
-      ];
-      setSortedUsers(mockUsers);
-      return;
-    }
+    const mockUsers = [
+    { id: 1, name: 'Jo??o Silva', xp: 2500, level: 15, streak: 25, languageLevels: { javascript: 15, python: 10, cpp: 5, lua: 8, database: 6 }, completedMissions: 18, badge: '???' },
+    { id: 2, name: 'Maria Santos', xp: 2300, level: 14, streak: 18, languageLevels: { javascript: 14, python: 12, cpp: 8, lua: 10, database: 7 }, completedMissions: 15, badge: '?Y??' },
+  ];
 
-    let sorted = [...allUsers];
+  const baseUsers = getAllUsersWithMetrics();
+  const sortedUsers = [...(baseUsers.length > 0 ? baseUsers : mockUsers)];
 
-    if (rankingCategory === 'xp') {
-      sorted.sort((a, b) => b.xp - a.xp);
-    } else if (rankingCategory === 'streak') {
-      sorted.sort((a, b) => b.streak - a.streak);
-    } else if (rankingCategory === 'languages') {
-      sorted.sort((a, b) => 
-        (b.languageLevels[languageFilter] || 0) - (a.languageLevels[languageFilter] || 0)
-      );
-    } else if (rankingCategory === 'missions') {
-      sorted.sort((a, b) => b.completedMissions - a.completedMissions);
-    }
+  if (rankingCategory === 'xp') {
+    sortedUsers.sort((a, b) => b.xp - a.xp);
+  } else if (rankingCategory === 'streak') {
+    sortedUsers.sort((a, b) => b.streak - a.streak);
+  } else if (rankingCategory === 'languages') {
+    sortedUsers.sort((a, b) =>
+      (b.languageLevels[languageFilter] || 0) - (a.languageLevels[languageFilter] || 0)
+    );
+  } else if (rankingCategory === 'missions') {
+    sortedUsers.sort((a, b) => b.completedMissions - a.completedMissions);
+  }
 
-    setSortedUsers(sorted);
-
-    if (user) {
-      const position = sorted.findIndex(u => u.id === user.uid) + 1;
-      setUserRank(position || null);
-    }
-  }, [rankingCategory, languageFilter, user]);
-
-  const getMedalIcon = (position) => {
-    if (position === 1) return '🥇';
-    if (position === 2) return '🥈';
-    if (position === 3) return '🥉';
-    return position;
-  };
-
-  const getRankColor = (position) => {
-    if (position === 1) return 'rank-first';
-    if (position === 2) return 'rank-second';
-    if (position === 3) return 'rank-third';
-    return 'rank-other';
-  };
+  const userRankIndex = user ? sortedUsers.findIndex(u => u.id === user.uid) : -1;
+  const userRank = userRankIndex >= 0 ? userRankIndex + 1 : null;
 
   return (
-    <motion.div
+    <MotionDiv
       className="ranking-page"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
@@ -193,7 +166,7 @@ const Ranking = () => {
         </div>
       </div>
 
-      <motion.div
+      <MotionDiv
         className="leaderboard"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -212,7 +185,7 @@ const Ranking = () => {
         </div>
 
         {sortedUsers.slice(0, 10).map((rankUser, index) => (
-          <motion.div
+          <MotionDiv
             key={rankUser.id}
             className={`leaderboard-row ${index === 0 ? 'rank-first' : index === 1 ? 'rank-second' : index === 2 ? 'rank-third' : 'rank-other'}`}
             initial={{ opacity: 0, x: -20 }}
@@ -240,11 +213,11 @@ const Ranking = () => {
             <div className="badge-col">
               <span className="badge">{rankUser.badge}</span>
             </div>
-          </motion.div>
+          </MotionDiv>
         ))}
-      </motion.div>
+      </MotionDiv>
 
-      <motion.div
+      <MotionDiv
         className="ranking-info"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -281,8 +254,8 @@ const Ranking = () => {
             <p>Complete missões especiais para ganhar pontos extras. Quanto mais missões, maior seu status!</p>
           </div>
         </div>
-      </motion.div>
-    </motion.div>
+      </MotionDiv>
+    </MotionDiv>
   );
 };
 

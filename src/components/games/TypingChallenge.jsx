@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import './TypingChallenge.css';
 
 const TypingChallenge = ({ onComplete }) => {
+  const MotionDiv = motion.div;
   const words = [
     'javascript', 'variável', 'função', 'constante', 'array', 'objeto', 'método',
     'condicional', 'loop', 'string', 'número', 'booleano', 'return', 'console',
@@ -56,7 +57,7 @@ const TypingChallenge = ({ onComplete }) => {
 
   if (!gameActive && time === 0) {
     return (
-      <motion.div
+      <MotionDiv
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
         className="typing-game-result"
@@ -83,7 +84,7 @@ const TypingChallenge = ({ onComplete }) => {
         <button onClick={() => onComplete({ score, wpm, accuracy, mistakes, wordsCompleted })}>
           Voltar
         </button>
-      </motion.div>
+      </MotionDiv>
     );
   }
 
@@ -99,14 +100,14 @@ const TypingChallenge = ({ onComplete }) => {
       </div>
 
       <div className="typing-content">
-        <motion.div
+        <MotionDiv
           key={currentWord}
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           className="current-word"
         >
           {currentWord}
-        </motion.div>
+        </MotionDiv>
 
         <input
           type="text"

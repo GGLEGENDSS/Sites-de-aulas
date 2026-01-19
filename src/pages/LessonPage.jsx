@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { ChevronLeft, ChevronRight, CheckCircle, Info } from 'lucide-react';
 import Terminal from '../components/Terminal';
@@ -7,23 +7,11 @@ import SuccessEffect from '../components/SuccessEffect';
 import { lessons } from '../data/lessons';
 import './LessonPage.css';
 
-const LessonPage = () => {
-  // ... (existing state)
-  const { id } = useParams();
+const LessonPageContent = ({ id }) => {
   const navigate = useNavigate();
-  const [currentLesson, setCurrentLesson] = useState(null);
+  const currentLesson = lessons.find(l => l.id === id);
   const [isCompleted, setIsCompleted] = useState(false);
   const [feedback, setFeedback] = useState(null);
-
-  useEffect(() => {
-    // Reset state on lesson change
-    const lesson = lessons.find(l => l.id === id);
-    if (lesson) {
-      setCurrentLesson(lesson);
-      setIsCompleted(false);
-      setFeedback(null);
-    }
-  }, [id]);
 
   const handleCommand = (command) => {
     if (!currentLesson) return;
@@ -102,6 +90,11 @@ const LessonPage = () => {
       </div>
     </div>
   );
+};
+
+const LessonPage = () => {
+  const { id } = useParams();
+  return <LessonPageContent key={id} id={id} />;
 };
 
 export default LessonPage;

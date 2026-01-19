@@ -12,40 +12,44 @@ const snippets = [
   "async function load() { await fetch(); }"
 ];
 
+const calculateAccuracy = (input, target) => {
+  if (input.length === 0) return 100;
+  let errors = 0;
+  for (let i = 0; i < input.length; i++) {
+    if (input[i] !== target[i]) errors++;
+  }
+  return Math.max(0, Math.floor(((input.length - errors) / input.length) * 100));
+};
+
 const CodeBlitz = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [userInput, setUserInput] = useState('');
   const [startTime, setStartTime] = useState(null);
   const [wpm, setWpm] = useState(0);
-  const [accuracy, setAccuracy] = useState(100);
   const [isFinished, setIsFinished] = useState(false);
   const inputRef = useRef(null);
 
   const targetSnippet = snippets[currentIndex];
+  const accuracy = calculateAccuracy(userInput, targetSnippet);
 
-  useEffect(() => {
-    if (userInput.length === 1 && !startTime) {
+  const handleInputChange = (e) => {
+    const value = e.target.value;
+
+    if (value.length === 1 && !startTime) {
       setStartTime(Date.now());
     }
 
-    if (userInput === targetSnippet) {
+    if (value === targetSnippet) {
       if (currentIndex < snippets.length - 1) {
         setCurrentIndex(prev => prev + 1);
         setUserInput('');
-      } else {
-        setIsFinished(true);
+        return;
       }
+      setIsFinished(true);
     }
 
-    // Calculate accuracy
-    if (userInput.length > 0) {
-      let errors = 0;
-      for (let i = 0; i < userInput.length; i++) {
-        if (userInput[i] !== targetSnippet[i]) errors++;
-      }
-      setAccuracy(Math.max(0, Math.floor(((userInput.length - errors) / userInput.length) * 100)));
-    }
-  }, [userInput]);
+    setUserInput(value);
+  };
 
   useEffect(() => {
     if (startTime && !isFinished) {
@@ -63,7 +67,6 @@ const CodeBlitz = () => {
     setUserInput('');
     setStartTime(null);
     setWpm(0);
-    setAccuracy(100);
     setIsFinished(false);
   };
 
@@ -101,7 +104,7 @@ const CodeBlitz = () => {
             ref={inputRef}
             type="text"
             value={userInput}
-            onChange={(e) => setUserInput(e.target.value)}
+            onChange={handleInputChange}
             placeholder="Comece a digitar..."
             autoFocus
           />

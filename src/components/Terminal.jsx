@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useCallback } from 'react';
 import { Terminal as XTerm } from 'xterm';
 import { FitAddon } from 'xterm-addon-fit';
 import { useProgress } from '../data/ProgressContext';
@@ -12,6 +12,70 @@ const Terminal = ({ onCommand }) => {
   
   // Persistent execution context
   const context = useRef({});
+
+  const executeCode = useCallback((code, term) => {
+    if (!code.trim()) return;
+
+    try {
+      // Basic detection of declarations
+      const isDecl = /^(let|var|const)\s+/.test(code.trim());
+      const isAssignment = /^[a-zA-Z_$][0-9a-zA-Z_$]*\s*=/.test(code.trim());
+      
+      let result;
+      if (isDecl) {
+        // Handle declaration: let x = 10
+        const match = code.match(/(?:let|var|const)\s+([a-zA-Z_$][0-9a-zA-Z_$]*)\s*=(.*)/);
+        if (match) {
+          const varName = match[1].trim();
+          const expr = match[2].trim().replace(/;$/, '');
+          
+          // Evaluate the expression in the current context
+          const keys = Object.keys(context.current);
+          const values = Object.values(context.current);
+          const evaluator = new Function(...keys, `return ${expr}`);
+          const val = evaluator.apply(null, values);
+          
+          context.current[varName] = val;
+          updateVisualState({ ...context.current });
+          result = val;
+        } else {
+          // Just a declaration without assignment: let x;
+          const nameMatch = code.match(/(?:let|var|const)\s+([a-zA-Z_$][0-9a-zA-Z_$]*)/);
+          if (nameMatch) {
+            context.current[nameMatch[1]] = undefined;
+            updateVisualState({ ...context.current });
+          }
+        }
+      } else {
+        // Not a declaration, could be an expression or assignment
+        const keys = Object.keys(context.current);
+        const values = Object.values(context.current);
+        
+        // Try to evaluate as an expression first
+        try {
+          const evaluator = new Function(...keys, `return ${code}`);
+          result = evaluator.apply(null, values);
+          
+          // If it was an assignment like x = 10, update context
+          if (isAssignment) {
+            const varName = code.split('=')[0].trim();
+            context.current[varName] = result;
+            updateVisualState({ ...context.current });
+          }
+        } catch {
+          // If expression fails, try as a statement
+          const runner = new Function(...keys, code);
+          result = runner.apply(null, values);
+        }
+      }
+
+      if (result !== undefined) {
+        term.writeln(`\x1b[1;34m=> ${JSON.stringify(result)}\x1b[0m`);
+      }
+    } catch (e) {
+      term.writeln(`\x1b[1;31mErro: ${e.message}\x1b[0m`);
+    }
+  }, [updateVisualState]);
 
   useEffect(() => {
     const term = new XTerm({
@@ -67,71 +131,7 @@ const Terminal = ({ onCommand }) => {
         xtermRef.current = null;
       }
     };
-  }, [onCommand, updateVisualState]); // Add dependencies
-
-  const executeCode = (code, term) => {
-    if (!code.trim()) return;
-
-    try {
-      // Basic detection of declarations
-      const isDecl = /^(let|var|const)\s+/.test(code.trim());
-      const isAssignment = /^[a-zA-Z_$][0-9a-zA-Z_$]*\s*=/.test(code.trim());
-      
-      let result;
-      if (isDecl) {
-        // Handle declaration: let x = 10
-        const match = code.match(/(?:let|var|const)\s+([a-zA-Z_$][0-9a-zA-Z_$]*)\s*=(.*)/);
-        if (match) {
-          const varName = match[1].trim();
-          const expr = match[2].trim().replace(/;$/, '');
-          
-          // Evaluate the expression in the current context
-          const keys = Object.keys(context.current);
-          const values = Object.values(context.current);
-          const evaluator = new Function(...keys, `return ${expr}`);
-          const val = evaluator.apply(null, values);
-          
-          context.current[varName] = val;
-          updateVisualState({ ...context.current });
-          result = val;
-        } else {
-          // Just a declaration without assignment: let x;
-          const nameMatch = code.match(/(?:let|var|const)\s+([a-zA-Z_$][0-9a-zA-Z_$]*)/);
-          if (nameMatch) {
-            context.current[nameMatch[1]] = undefined;
-            updateVisualState({ ...context.current });
-          }
-        }
-      } else {
-        // Not a declaration, could be an expression or assignment
-        const keys = Object.keys(context.current);
-        const values = Object.values(context.current);
-        
-        // Try to evaluate as an expression first
-        try {
-          const evaluator = new Function(...keys, `return ${code}`);
-          result = evaluator.apply(null, values);
-          
-          // If it was an assignment like x = 10, update context
-          if (isAssignment) {
-            const varName = code.split('=')[0].trim();
-            context.current[varName] = result;
-            updateVisualState({ ...context.current });
-          }
-        } catch (e) {
-          // If expression fails, try as a statement
-          const runner = new Function(...keys, code);
-          result = runner.apply(null, values);
-        }
-      }
-
-      if (result !== undefined) {
-        term.writeln(`\x1b[1;34m=> ${JSON.stringify(result)}\x1b[0m`);
-      }
-    } catch (e) {
-      term.writeln(`\x1b[1;31mErro: ${e.message}\x1b[0m`);
-    }
-  };
+  }, [onCommand, executeCode]); // Add dependencies
 
   return (
     <div 

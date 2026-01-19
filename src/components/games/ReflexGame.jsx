@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import './ReflexGame.css';
 
 export function ReflexGame() {
+  const MotionDiv = motion.div;
   const [gameStarted, setGameStarted] = useState(false);
   const [gameActive, setGameActive] = useState(false);
   const [roundCount, setRoundCount] = useState(0);
@@ -80,7 +81,7 @@ export function ReflexGame() {
 
   if (!gameStarted) {
     return (
-      <motion.div
+      <MotionDiv
         className="reflex-intro"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -99,7 +100,7 @@ export function ReflexGame() {
         <button className="start-button" onClick={startGame}>
           Começar Jogo
         </button>
-      </motion.div>
+      </MotionDiv>
     );
   }
 
@@ -109,7 +110,7 @@ export function ReflexGame() {
     const worst = getWorstReactionTime();
 
     return (
-      <motion.div
+      <MotionDiv
         className="reflex-result"
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
@@ -148,12 +149,12 @@ export function ReflexGame() {
         <button className="play-again-button" onClick={() => setGameStarted(false)}>
           {roundCount < 10 ? 'Tentar Novamente' : 'Jogar Novamente'}
         </button>
-      </motion.div>
+      </MotionDiv>
     );
   }
 
   return (
-    <motion.div
+    <MotionDiv
       className="reflex-game"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
@@ -172,7 +173,7 @@ export function ReflexGame() {
         </div>
       </div>
 
-      <motion.div
+      <MotionDiv
         className={`reflex-box color-${boxColor}`}
         onClick={handleBoxClick}
         whileHover={{ scale: 1.05 }}
@@ -189,11 +190,11 @@ export function ReflexGame() {
         }}
       >
         {waitingForColor ? '⏳' : '✓'}
-      </motion.div>
+      </MotionDiv>
 
       <p className="instruction">
         {waitingForColor ? 'Aguarde a cor mudar...' : 'Clique agora!'}
       </p>
-    </motion.div>
+    </MotionDiv>
   );
 }

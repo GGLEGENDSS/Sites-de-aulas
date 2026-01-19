@@ -36,7 +36,7 @@ export const lessons = [
     `,
     instructions: 'Declare uma variável chamada `vida` com o valor 100.',
     challenge: (input) => input.includes('let vida = 100'),
-    hint: 'Lembre-se: \`let\` [nome] = [valor];'
+    hint: 'Lembre-se: `let` [nome] = [valor];'
   },
   {
     id: 'js-2',
@@ -160,7 +160,7 @@ export const lessons = [
       !(idade < 18)                   // true (NÃO)
       \`\`\`
     `,
-    instructions: 'Crie: \`let teste = 15 > 10;\` e \`let teste2 = "abc" === "abc";\`',
+    instructions: 'Crie: `let teste = 15 > 10;` e `let teste2 = "abc" === "abc";`',
     challenge: (input) => (input.includes('let teste = 15 > 10') || input.includes('let teste = true')) && input.includes('let teste2'),
     hint: 'Use > para comparação e === para igualdade'
   },
@@ -268,7 +268,7 @@ export const lessons = [
       **Tente declarar um número inteiro (int):**
       \`int score = 500;\` (Simule no terminal com let score = 500)
     `,
-    instructions: 'Declare uma variável simulando Java: \`let score = 500;\`',
+    instructions: 'Declare uma variável simulando Java: `let score = 500;`',
     challenge: (input) => input.includes('let score = 500'),
     hint: 'Use um número inteiro!'
   },
@@ -309,7 +309,7 @@ export const lessons = [
       **Tente criar um texto em Python:**
       \`print("Olá Mundo")\` (No terminal: let msg = "Olá Mundo")
     `,
-    instructions: 'Simule um print criando uma variável \`msg\` com o texto "Olá Mundo".',
+    instructions: 'Simule um print criando uma variável `msg` com o texto "Olá Mundo".',
     challenge: (input) => input.includes('let msg = "Olá Mundo"'),
     hint: 'Use aspas duplas.'
   },

@@ -12,6 +12,7 @@ import { createUserWithEmailAndPassword, signInWithEmailAndPassword, sendPasswor
 import "./Login.css";
 
 const Login = () => {
+  const MotionDiv = motion.div;
   const [isLogin, setIsLogin] = useState(true);
   const [showPassword, setShowPassword] = useState(false);
   const [showResetModal, setShowResetModal] = useState(false);
@@ -162,7 +163,7 @@ const Login = () => {
       setSuccess("Email de recuperação enviado! Verifique sua caixa de entrada.");
       setResetEmail("");
       setTimeout(() => setShowResetModal(false), 2000);
-    } catch (err) {
+    } catch {
       setError("Erro ao enviar email de recuperação. Verifique o email e tente novamente.");
     } finally {
       setLoading(false);
@@ -173,7 +174,7 @@ const Login = () => {
     <div className="min-h-screen relative flex items-center justify-center p-4 sm:p-6 md:p-8 bg-[#0a0c10] overflow-hidden" style={{ backgroundColor: '#0a0c10' }}>
       <AnimatedWaveBackground />
 
-      <motion.div
+      <MotionDiv
         initial={{ opacity: 0, y: 20, scale: 0.95 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
         transition={{ duration: 0.5, ease: "easeOut" }}
@@ -195,7 +196,7 @@ const Login = () => {
           {/* Mensagens de Sucesso */}
           <AnimatePresence>
             {success && (
-              <motion.div
+              <MotionDiv
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
@@ -203,14 +204,14 @@ const Login = () => {
               >
                 <CheckCircle className="w-5 h-5 flex-shrink-0" />
                 <span className="text-xs sm:text-sm font-medium">{success}</span>
-              </motion.div>
+              </MotionDiv>
             )}
           </AnimatePresence>
 
           {/* Mensagens de Erro */}
           <AnimatePresence>
             {error && (
-              <motion.div
+              <MotionDiv
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
@@ -218,7 +219,7 @@ const Login = () => {
               >
                 <AlertCircle className="w-5 h-5 flex-shrink-0" />
                 <span className="text-xs sm:text-sm font-medium">{error}</span>
-              </motion.div>
+              </MotionDiv>
             )}
           </AnimatePresence>
 
@@ -258,7 +259,7 @@ const Login = () => {
 
           <AnimatePresence mode="wait">
             {showResetModal ? (
-              <motion.div
+              <MotionDiv
                 key="reset"
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
@@ -311,9 +312,9 @@ const Login = () => {
                     Voltar ao Login
                   </button>
                 </form>
-              </motion.div>
+              </MotionDiv>
             ) : (
-              <motion.div
+              <MotionDiv
                 key={isLogin ? "login" : "signup"}
                 initial={{ opacity: 0, x: isLogin ? -20 : 20 }}
                 animate={{ opacity: 1, x: 0 }}
@@ -476,7 +477,7 @@ const Login = () => {
                     </a>
                   </p>
                 </div>
-              </motion.div>
+              </MotionDiv>
             )}
           </AnimatePresence>
 
@@ -487,7 +488,7 @@ const Login = () => {
             </div>
           )}
         </div>
-      </motion.div>
+      </MotionDiv>
     </div>
   );
 };

@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 const AnimatedWaveBackground = ({ className }) => {
   const containerRef = useRef(null);
   const mousePosition = useRef({ x: 0.5, y: 0.5 });
+  const MotionDiv = motion.div;
 
   useEffect(() => {
     const handleMouseMove = (e) => {
@@ -29,7 +30,7 @@ const AnimatedWaveBackground = ({ className }) => {
       <div className="absolute inset-0 bg-gradient-to-br from-[#0a0c10] via-[#1a1f2e] to-[#0a0c10]" />
 
       {/* Animated wave layers - Desktop */}
-      <motion.div
+      <MotionDiv
         className="absolute inset-0 hidden md:block"
         animate={{
           background: [
@@ -46,7 +47,7 @@ const AnimatedWaveBackground = ({ className }) => {
       />
 
       {/* Animated wave layers - Tablet/Mobile */}
-      <motion.div
+      <MotionDiv
         className="absolute inset-0 block md:hidden"
         animate={{
           background: [
@@ -62,7 +63,7 @@ const AnimatedWaveBackground = ({ className }) => {
         }}
       />
 
-      <motion.div
+      <MotionDiv
         className="absolute inset-0"
         animate={{
           background: [
@@ -78,7 +79,7 @@ const AnimatedWaveBackground = ({ className }) => {
         }}
       />
 
-      <motion.div
+      <MotionDiv
         className="absolute inset-0"
         animate={{
           background: [
@@ -96,7 +97,7 @@ const AnimatedWaveBackground = ({ className }) => {
       />
 
       {/* Interactive glow that follows mouse */}
-      <motion.div
+      <MotionDiv
         className="absolute w-96 h-96 pointer-events-none"
         animate={{
           x: ["-50%", "-50%"],

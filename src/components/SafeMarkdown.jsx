@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Search, AlertCircle } from 'lucide-react';
+import { AlertCircle } from 'lucide-react';
 import DOMPurify from 'isomorphic-dompurify';
 import './SafeMarkdown.css';
 
@@ -22,7 +22,7 @@ const SafeMarkdown = ({ content, className = '' }) => {
       // Sanitize the HTML
       const clean = DOMPurify.sanitize(markdown, config);
       return clean;
-    } catch (err) {
+    } catch {
       setError('Erro ao processar conteúdo');
       return '';
     }

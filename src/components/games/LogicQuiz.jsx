@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import './LogicQuiz.css';
 
@@ -41,6 +41,9 @@ const quizzes = [
 ];
 
 export function LogicQuiz() {
+  const MotionDiv = motion.div;
+  const MotionButton = motion.button;
+  const MotionH2 = motion.h2;
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [score, setScore] = useState(0);
   const [answered, setAnswered] = useState(false);
@@ -82,7 +85,7 @@ export function LogicQuiz() {
     const percentage = Math.round((score / (quizzes.length * 10)) * 100);
     
     return (
-      <motion.div
+      <MotionDiv
         className="logic-quiz-result"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -110,12 +113,12 @@ export function LogicQuiz() {
           {percentage < 50 && 'Não desista! Releia as lições e tente novamente! 📚'}
         </p>
         <button onClick={restartQuiz}>Tenter Novamente</button>
-      </motion.div>
+      </MotionDiv>
     );
   }
 
   return (
-    <motion.div
+    <MotionDiv
       className="logic-quiz"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
@@ -135,7 +138,7 @@ export function LogicQuiz() {
       </div>
 
       <div className="quiz-content">
-        <motion.h2
+        <MotionH2
           key={currentQuestion}
           initial={{ opacity: 0, x: 20 }}
           animate={{ opacity: 1, x: 0 }}
@@ -143,11 +146,11 @@ export function LogicQuiz() {
           className="question"
         >
           {quiz.question}
-        </motion.h2>
+        </MotionH2>
 
         <div className="options">
           {quiz.options.map((option, index) => (
-            <motion.button
+            <MotionButton
               key={index}
               className={`option ${
                 selectedAnswer === index
@@ -167,12 +170,12 @@ export function LogicQuiz() {
               transition={{ delay: index * 0.1 }}
             >
               {option}
-            </motion.button>
+            </MotionButton>
           ))}
         </div>
 
         {answered && (
-          <motion.div
+          <MotionDiv
             className="explanation"
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
@@ -185,9 +188,9 @@ export function LogicQuiz() {
             <button onClick={nextQuestion} className="next-btn">
               {currentQuestion + 1 === quizzes.length ? 'Ver Resultado' : 'Próxima'}
             </button>
-          </motion.div>
+          </MotionDiv>
         )}
       </div>
-    </motion.div>
+    </MotionDiv>
   );
 }

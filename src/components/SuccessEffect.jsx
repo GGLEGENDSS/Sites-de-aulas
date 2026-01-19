@@ -1,23 +1,18 @@
-import { useEffect, useState } from 'react';
+import { useMemo } from 'react';
 import './SuccessEffect.css';
 
-const SuccessEffect = ({ active }) => {
-  const [particles, setParticles] = useState([]);
+const PARTICLE_COLORS = ['#58cc02', '#ffd700', '#00599C', '#3776ab'];
 
-  useEffect(() => {
-    if (active) {
-      const newParticles = Array.from({ length: 40 }).map((_, i) => ({
-        id: i,
-        left: Math.random() * 100 + '%',
-        top: Math.random() * 100 + '%',
-        delay: Math.random() * 2 + 's',
-        color: ['#58cc02', '#ffd700', '#00599C', '#3776ab'][Math.floor(Math.random() * 4)]
-      }));
-      setParticles(newParticles);
-      
-      const timer = setTimeout(() => setParticles([]), 3000);
-      return () => clearTimeout(timer);
-    }
+const SuccessEffect = ({ active }) => {
+  const particles = useMemo(() => {
+    if (!active) return [];
+    return Array.from({ length: 40 }, (_, i) => ({
+      id: i,
+      left: `${(i * 23) % 100}%`,
+      top: `${(i * 47) % 100}%`,
+      delay: `${(i % 10) * 0.2}s`,
+      color: PARTICLE_COLORS[i % PARTICLE_COLORS.length]
+    }));
   }, [active]);
 
   if (!active || particles.length === 0) return null;

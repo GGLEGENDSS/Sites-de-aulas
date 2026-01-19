@@ -23,7 +23,7 @@ class ErrorBoundary extends React.Component {
           <button onClick={() => window.location.reload()}>
             Recarregar Página
           </button>
-          {process.env.NODE_ENV === 'development' && (
+          {import.meta.env.DEV && (
             <details style={{ marginTop: '20px' }}>
               <summary>Detalhes do erro</summary>
               <pre>{this.state.error?.toString()}</pre>

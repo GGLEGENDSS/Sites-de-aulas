@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+/* eslint-disable react-hooks/set-state-in-effect */
+import { useState, useEffect, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import './MemoryGame.css';
 
@@ -8,6 +9,7 @@ const CARDS = [
 ];
 
 export function MemoryGame() {
+  const MotionDiv = motion.div;
   const [cards, setCards] = useState([]);
   const [flipped, setFlipped] = useState([]);
   const [matched, setMatched] = useState([]);
@@ -16,9 +18,20 @@ export function MemoryGame() {
   const [startTime, setStartTime] = useState(null);
   const [elapsedTime, setElapsedTime] = useState(0);
 
+  const initializeGame = useCallback(() => {
+    const shuffled = [...CARDS].sort(() => Math.random() - 0.5);
+    setCards(shuffled);
+    setFlipped([]);
+    setMatched([]);
+    setMoves(0);
+    setGameOver(false);
+    setStartTime(Date.now());
+    setElapsedTime(0);
+  }, []);
+
   useEffect(() => {
     initializeGame();
-  }, []);
+  }, [initializeGame]);
 
   useEffect(() => {
     if (!startTime || gameOver) return;
@@ -35,17 +48,6 @@ export function MemoryGame() {
       setGameOver(true);
     }
   }, [matched]);
-
-  const initializeGame = () => {
-    const shuffled = [...CARDS].sort(() => Math.random() - 0.5);
-    setCards(shuffled);
-    setFlipped([]);
-    setMatched([]);
-    setMoves(0);
-    setGameOver(false);
-    setStartTime(Date.now());
-    setElapsedTime(0);
-  };
 
   const handleCardClick = (index) => {
     if (flipped.includes(index) || matched.includes(index) || flipped.length === 2) {
@@ -80,7 +82,7 @@ export function MemoryGame() {
     const efficiency = Math.round((pairs / moves) * 100);
 
     return (
-      <motion.div
+      <MotionDiv
         className="memory-game-result"
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
@@ -108,12 +110,12 @@ export function MemoryGame() {
           {efficiency < 40 && 'Continue praticando! 📚'}
         </p>
         <button onClick={initializeGame}>Jogar Novamente</button>
-      </motion.div>
+      </MotionDiv>
     );
   }
 
   return (
-    <motion.div
+    <MotionDiv
       className="memory-game"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
@@ -143,7 +145,7 @@ export function MemoryGame() {
 
       <div className="cards-grid">
         {cards.map((card, index) => (
-          <motion.div
+          <MotionDiv
             key={index}
             className={`card ${flipped.includes(index) || matched.includes(index) ? 'flipped' : ''}`}
             onClick={() => handleCardClick(index)}
@@ -154,9 +156,9 @@ export function MemoryGame() {
               <div className="card-front">?</div>
               <div className="card-back">{card}</div>
             </div>
-          </motion.div>
+          </MotionDiv>
         ))}
       </div>
-    </motion.div>
+    </MotionDiv>
   );
 }
